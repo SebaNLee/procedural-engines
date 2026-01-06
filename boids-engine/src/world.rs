@@ -1,6 +1,7 @@
 use crate::Params;
 use crate::Boid;
 use crate::Vec2;
+use crate::random::random_f32;
 
 pub struct World {
     boids: Vec<Boid>,
@@ -19,8 +20,8 @@ impl World {
         for _ in 0..n {
             boids.push(Boid::new(
                 Vec2::new(
-                    rand::random::<f32>() * width,
-                    rand::random::<f32>() * height
+                    random_f32() * width,
+                    random_f32() * height
                 ),
                 Vec2::new(
                     0.2,
@@ -78,8 +79,8 @@ impl World {
             // boost on attractor exit
             if self.boost_on_attractor_exit {
                 let boost = Vec2::new(
-                    rand::random::<f32>() - 0.5,
-                    rand::random::<f32>() - 0.5,
+                    random_f32() - 0.5,
+                    random_f32() - 0.5,
                 )
                 .normalize()
                 * 3.0;
@@ -136,8 +137,8 @@ impl World {
          + self.attraction_rule(i) * self.params.attraction;
 
         let noise = Vec2::new(
-            rand::random::<f32>() - 0.5,
-            rand::random::<f32>() - 0.5,
+            random_f32() - 0.5,
+            random_f32() - 0.5,
         ).normalize() * self.params.noise;
 
         acc + noise

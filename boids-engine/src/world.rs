@@ -34,4 +34,36 @@ impl World {
             height
         }
     }
+
+    pub fn set_params(&mut self, params: Params) {
+        self.params = params;
+    }
+
+    pub fn get_boids(&self) -> &[Boids] {
+        &self.boids
+    }
+
+    pub fn step(&mut self, dt: f32) {
+
+    }
+
+    fn compute_acceleration(&self, i: usize) -> Vec2 {
+
+    }
+
+    fn separation_rule(&self, i: usize) -> Vec2 {
+
+    }
+
+    fn alignment_rule(&self, i: usize) -> Vec2 {
+
+    }
+
+    fn cohesion_rule(&self, i: usize) -> Vec2 {
+
+    }
+
+    fn attraction_rule(&self, i: usize) -> Vec2 {
+
+    }
 }

@@ -32,7 +32,8 @@ impl World {
             boids,
             params: Params::default(),
             width,
-            height
+            height,
+            attractor: None,
         }
     }
 

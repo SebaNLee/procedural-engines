@@ -76,21 +76,40 @@ impl World {
             boid.vel = boid.vel.limit(self.params.max_speed);
             boid.pos += boid.vel * dt;
 
-            // wrap around
-            if boid.pos.x < 0.0 {
-                boid.pos.x += self.width;
-            }
+            if self.params.bonce_on_edge {
+                // bounce
+                if boid.pos.x < 0.0 {
+                    boid.pos.x = 0.0;
+                    boid.vel.x *= -1.0;
+                } else if boid.pos.x > self.width {
+                    boid.pos.x = self.width;
+                    boid.vel.x *= -1.0;
+                }
 
-            if boid.pos.y < 0.0 {
-                boid.pos.y += self.height;
-            }
+                if boid.pos.y < 0.0 {
+                    boid.pos.y = 0.0;
+                    boid.vel.y *= -1.0;
+                } else if boid.pos.y > self.height {
+                    boid.pos.y = self.height;
+                    boid.vel.y *= -1.0;
+                }
+            } else {
+                // wrap around
+                if boid.pos.x < 0.0 {
+                    boid.pos.x += self.width;
+                }
 
-            if boid.pos.x > self.width {
-                boid.pos.x -= self.width;
-            }
+                if boid.pos.y < 0.0 {
+                    boid.pos.y += self.height;
+                }
 
-            if boid.pos.y > self.height {
-                boid.pos.y -= self.height;
+                if boid.pos.x > self.width {
+                    boid.pos.x -= self.width;
+                }
+
+                if boid.pos.y > self.height {
+                    boid.pos.y -= self.height;
+                }
             }
         }
 

@@ -12,13 +12,13 @@ pub struct Params {
 impl Default for Params {
     fn default() -> Self {
         Self {
-            separation: 2.5,
+            separation: 2.7,
             alignment: 0.5,
             cohesion: 3.0,
             attraction: 15.0,
 
-            max_speed: 250.0,
-            perception_radius: 80.0,
+            max_speed: 200.0,
+            perception_radius: 50.0,
         }
     }
 }

@@ -41,7 +41,7 @@ impl World {
         self.params = params;
     }
 
-    pub fn get_boids(&self) -> &[Boids] {
+    pub fn get_boids(&self) -> &[Boid] {
         &self.boids
     }
 
@@ -53,7 +53,22 @@ impl World {
             boid.vel = boid.vel.limit(self.params.max_speed);
             boid.pos += boid.vel * dt;
 
-            self.wrap_around(boid);
+            // wrap around
+            if boid.pos.x < 0.0 {
+                boid.pos.x += self.width;
+            }
+
+            if boid.pos.y < 0.0 {
+                boid.pos.y += self.height;
+            }
+
+            if boid.pos.x > self.width {
+                boid.pos.x -= self.width;
+            }
+
+            if boid.pos.y > self.height {
+                boid.pos.y -= self.height;
+            }
         }
     }
 
@@ -75,7 +90,7 @@ impl World {
             }
 
             let diff = other.pos - boid.pos;
-            let dist = diff.normalize();
+            let dist = diff.magnitude();
 
             if dist > 0.0 && dist < self.params.perception_radius {
                 force -= diff.normalize() / dist;
@@ -101,7 +116,7 @@ impl World {
             }
 
             let diff = other.pos - boid.pos;
-            let dist = diff.normalize();
+            let dist = diff.magnitude();
 
             if dist < self.params.perception_radius {
                 avg_vel += other.vel;
@@ -110,9 +125,9 @@ impl World {
         }
 
         if count > 0 {
-            (avg_vel * (1.0 / count as f32)).normalize()  
+            (avg_vel / count as f32).normalize()  
         } else {
-            Vec2::Zero
+            Vec2::ZERO
         }
     }
 
@@ -128,7 +143,7 @@ impl World {
             }
 
             let diff = other.pos - boid.pos;
-            let dist = diff.normalize();
+            let dist = diff.magnitude();
 
             if dist < self.params.perception_radius {
                 center += other.pos;
@@ -137,9 +152,9 @@ impl World {
         }
 
         if count > 0 {
-            (center * (1.0 / count as f32) - boid.pos).normalize()  
+            ((center / count as f32) - boid.pos).normalize()  
         } else {
-            Vec2::Zero
+            Vec2::ZERO
         }
     }
 
@@ -153,24 +168,6 @@ impl World {
             }
         } else {
             Vec2::ZERO
-        }
-    }
-
-    fn wrap_around(&self, boid: &mut Boid) {
-        if boid.pos.x < 0.0 {
-            boid.pos.x += self.width;
-        }
-
-        if boid.pos.y < 0.0 {
-            boid.pos.y += self.height;
-        }
-
-        if boid.pos.x > self.width {
-            boid.pos.x -= self.width;
-        }
-
-        if boid.pos.y > self.height {
-            boid.pos.y -= self.height;
         }
     }
 }

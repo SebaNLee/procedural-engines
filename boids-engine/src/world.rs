@@ -8,7 +8,8 @@ pub struct World {
     width: f32,
     height: f32,
 
-    attractor: Option<Vec2>,   
+    attractor: Option<Vec2>,
+    boost_on_attractor_exit: bool,
 }
 
 impl World {
@@ -34,6 +35,7 @@ impl World {
             width,
             height,
             attractor: None,
+            boost_on_attractor_exit: false,
         }
     }
 
@@ -50,6 +52,7 @@ impl World {
     }
 
     pub fn clear_attractor(&mut self) {
+        self.boost_on_attractor_exit = true;
         self.attractor = None
     }
 
@@ -58,6 +61,18 @@ impl World {
 
         for (boid, acc) in self.boids.iter_mut().zip(accelerations) {
             boid.vel += acc;
+
+            // boost on attractor exit
+            if self.boost_on_attractor_exit {
+                let boost = Vec2::new(
+                    rand::random::<f32>() - 0.5,
+                    rand::random::<f32>() - 0.5,
+                )
+                .normalize()
+                * 3.0;
+                boid.vel += boost;
+            }
+
             boid.vel = boid.vel.limit(self.params.max_speed);
             boid.pos += boid.vel * dt;
 
@@ -78,6 +93,8 @@ impl World {
                 boid.pos.y -= self.height;
             }
         }
+
+        self.boost_on_attractor_exit = false;
     }
 
     fn compute_acceleration(&self, i: usize) -> Vec2 {
@@ -89,7 +106,7 @@ impl World {
         let noise = Vec2::new(
             rand::random::<f32>() - 0.5,
             rand::random::<f32>() - 0.5,
-        ).normalize() * 0.8;
+        ).normalize() * 0.8; // TODO magic number, should be param
 
         acc + noise
     }

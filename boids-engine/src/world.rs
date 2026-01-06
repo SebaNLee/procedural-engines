@@ -45,6 +45,14 @@ impl World {
         &self.boids
     }
 
+    pub fn set_attractor(&mut self, pos: Option<Vec2>) {
+        self.attractor = pos;
+    }
+
+    pub fn clear_attractor(&mut self) {
+        self.attractor = None
+    }
+
     pub fn step(&mut self, dt: f32) {
         let accelerations: Vec<Vec2> = (0..self.boids.len()).map(|i| self.compute_acceleration(i)).collect();
 

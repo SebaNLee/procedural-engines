@@ -10,6 +10,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "boids-gui"
+version = "0.1.0"
+
+[[package]]
 name = "boids-wasm"
 version = "0.1.0"
 

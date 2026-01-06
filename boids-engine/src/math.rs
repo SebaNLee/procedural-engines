@@ -26,6 +26,16 @@ impl Vec2 {
             Self::ZERO
         }
     }
+
+    pub fn limit(self, max: f32) -> Self {
+        let magnitude = self.magnitude();
+
+        if magnitude > max {
+            self.normalize() * max
+        } else {
+            self
+        }
+    }
 }
 
 impl Add for Vec2 {

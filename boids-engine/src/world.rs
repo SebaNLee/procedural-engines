@@ -81,10 +81,17 @@ impl World {
     }
 
     fn compute_acceleration(&self, i: usize) -> Vec2 {
-        self.separation_rule(i) * self.params.separation
+        let acc = self.separation_rule(i) * self.params.separation
          + self.alignment_rule(i) * self.params.alignment
          + self.cohesion_rule(i) * self.params.cohesion
-         + self.attraction_rule(i) * self.params.attraction
+         + self.attraction_rule(i) * self.params.attraction;
+
+        let noise = Vec2::new(
+            rand::random::<f32>() - 0.5,
+            rand::random::<f32>() - 0.5,
+        ).normalize() * 0.8;
+
+        acc + noise
     }
 
     fn separation_rule(&self, i: usize) -> Vec2 {

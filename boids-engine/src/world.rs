@@ -7,7 +7,8 @@ pub struct World {
     params: Params,
     width: f32,
     height: f32,
-    
+
+    attractor: Option<Vec2>,   
 }
 
 impl World {
@@ -142,7 +143,16 @@ impl World {
     }
 
     fn attraction_rule(&self, i: usize) -> Vec2 {
-
+        if let Some(target) = self.attractor {
+            let dir = target - self.boids[i].pos;
+            if dir.magnitude() > 0.0 {
+                dir.normalize()
+            } else {
+                Vec2::ZERO
+            }
+        } else {
+            Vec2::ZERO
+        }
     }
 
     fn wrap_around(&self, boid: &mut Boid) {

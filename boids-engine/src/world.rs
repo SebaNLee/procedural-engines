@@ -133,7 +133,9 @@ impl World {
         }
 
         if count > 0 {
-            (avg_vel / count as f32).normalize()  
+            let target = (avg_vel / count as f32).normalize();
+            let current = boid.vel.normalize();
+            (target - current).normalize()
         } else {
             Vec2::ZERO
         }
@@ -160,7 +162,7 @@ impl World {
         }
 
         if count > 0 {
-            ((center / count as f32) - boid.pos).normalize()  
+            ((center / count as f32) - boid.pos).normalize() 
         } else {
             Vec2::ZERO
         }

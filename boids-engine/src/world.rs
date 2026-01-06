@@ -63,7 +63,29 @@ impl World {
     }
 
     fn separation_rule(&self, i: usize) -> Vec2 {
+        let boid = &self.boids[i];
+        let mut force = Vec2::ZERO;
+        let mut count = 0;
 
+        for (j, other) in self.boids.iter().enumerate() {
+            if i == j {
+                continue;
+            }
+
+            let diff = other.pos - boid.pos;
+            let dist = diff.normalize();
+
+            if dist > 0.0 && dist < self.params.perception_radius {
+                force -= diff.normalize() / dist;
+                count += 1;
+            }
+        }
+
+        if count > 0 {
+            force.normalize()
+        } else {
+            Vec2::ZERO
+        }
     }
 
     fn alignment_rule(&self, i: usize) -> Vec2 {

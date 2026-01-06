@@ -115,7 +115,30 @@ impl World {
     }
 
     fn cohesion_rule(&self, i: usize) -> Vec2 {
+        let boid = &self.boids[i];
+        let mut center = Vec2::ZERO;
+        let mut count = 0;
 
+
+        for (j, other) in self.boids.iter().enumerate() {
+            if i == j {
+                continue;
+            }
+
+            let diff = other.pos - boid.pos;
+            let dist = diff.normalize();
+
+            if dist < self.params.perception_radius {
+                center += other.pos;
+                count += 1;
+            }
+        }
+
+        if count > 0 {
+            (center * (1.0 / count as f32) - boid.pos).normalize()  
+        } else {
+            Vec2::Zero
+        }
     }
 
     fn attraction_rule(&self, i: usize) -> Vec2 {

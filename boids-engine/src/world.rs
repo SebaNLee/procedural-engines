@@ -44,7 +44,15 @@ impl World {
     }
 
     pub fn step(&mut self, dt: f32) {
+        let accelerations: Vec<Vec2> = (0..self.boids.len()).map(|i| self.compute_acceleration(i)).collect();
 
+        for (boid, acc) in self.boids.iter_mut().zip(accelerations) {
+            boid.vel += acc;
+            boid.vel = boid.vel.limit(self.params.max_speed);
+            boid.pos += boid.vel * dt;
+
+            self.wrap_around(boid);
+        }
     }
 
     fn compute_acceleration(&self, i: usize) -> Vec2 {
@@ -65,5 +73,23 @@ impl World {
 
     fn attraction_rule(&self, i: usize) -> Vec2 {
 
+    }
+
+    fn wrap_around(&self, boid: &mut Boid) {
+        if boid.pos.x < 0.0 {
+            boid.pos.x += self.width;
+        }
+
+        if boid.pos.y < 0.0 {
+            boid.pos.y += self.height;
+        }
+
+        if boid.pos.x > self.width {
+            boid.pos.x -= self.width;
+        }
+
+        if boid.pos.y > self.height {
+            boid.pos.y -= self.height;
+        }
     }
 }

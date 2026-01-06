@@ -1,6 +1,3 @@
 [workspace]
 resolver = "3"
 members = ["boids-engine", "boids-gui", "boids-wasm"]
-
-[dependencies]
-rand = "0.8.5"

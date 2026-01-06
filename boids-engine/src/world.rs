@@ -39,8 +39,21 @@ impl World {
         }
     }
 
-    pub fn set_params(&mut self, params: Params) {
-        self.params = params;
+    pub fn set_params(&mut self, name: &str, value: f32) {
+        match name {
+            "separation" => self.params.separation = value,
+            "alignment" => self.params.alignment = value,
+            "cohesion" => self.params.cohesion = value,
+            "attraction" => self.params.attraction = value,
+            "noise" => self.params.noise = value,
+            "max_speed" => self.params.max_speed = value,
+            "perception_radius" => self.params.perception_radius = value,
+            _ => (),
+        }
+    }
+
+    pub fn set_bounce_on_edge(&mut self, bounce: bool) {
+        self.params.bounce_on_edge = bounce;
     }
 
     pub fn get_boids(&self) -> &[Boid] {
@@ -76,7 +89,7 @@ impl World {
             boid.vel = boid.vel.limit(self.params.max_speed);
             boid.pos += boid.vel * dt;
 
-            if self.params.bonce_on_edge {
+            if self.params.bounce_on_edge {
                 // bounce
                 if boid.pos.x < 0.0 {
                     boid.pos.x = 0.0;

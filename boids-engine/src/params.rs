@@ -9,7 +9,7 @@ pub struct Params {
     pub max_speed: f32,
     pub perception_radius: f32,
 
-    pub bonce_on_edge: bool, 
+    pub bounce_on_edge: bool, 
 }
 
 impl Default for Params {
@@ -23,7 +23,7 @@ impl Default for Params {
 
             max_speed: 200.0,
             perception_radius: 50.0,
-            bonce_on_edge: true,
+            bounce_on_edge: true,
         }
     }
 }

@@ -38,6 +38,9 @@ dependencies = [
 [[package]]
 name = "boids-wasm"
 version = "0.1.0"
+dependencies = [
+ "wasm-bindgen",
+]
 
 [[package]]
 name = "bumpalo"

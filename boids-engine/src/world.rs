@@ -56,7 +56,10 @@ impl World {
     }
 
     fn compute_acceleration(&self, i: usize) -> Vec2 {
-
+        self.separation_rule(i) * self.params.separation
+         + self.alignment_rule(i) * self.params.alignment
+         + self.cohesion_rule(i) * self.params.cohesion
+         + self.attraction_rule(i) * self.params.attraction
     }
 
     fn separation_rule(&self, i: usize) -> Vec2 {

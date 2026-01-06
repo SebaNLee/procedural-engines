@@ -106,7 +106,7 @@ impl World {
         let noise = Vec2::new(
             rand::random::<f32>() - 0.5,
             rand::random::<f32>() - 0.5,
-        ).normalize() * 0.5; // TODO magic number, should be param
+        ).normalize() * self.params.noise;
 
         acc + noise
     }

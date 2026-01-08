@@ -4,7 +4,34 @@
 
 
 
+<!-- Readme boids
+
+Resumen
+ General
+ Expl 4ta regla
+ gifs/vids
+
+Explicación componentes/dirs
+Engine
+Gui
+Npm
+ Versión?
+
+Usage
+ exp dirs
 
 
 
-<!-- WSL bug with x11, vcxsrv, xlaunch -> use script -->
+...
+Descripción
+
+-->
+
+
+
+
+<!--
+
+WSL bug with x11, vcxsrv, xlaunch -> use script
+
+-->

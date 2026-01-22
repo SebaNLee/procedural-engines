@@ -1,4 +1,19 @@
-# Boids-Engine
+<!-- ## Boids-Engine
+
+A simple Rust proyect that computes the Boids algorithm - normally used to simulate the flocking behaviour of birds. With a small modification.
+
+In addition to the original three rules (Separation, Alignment, Cohesion), a fourth Attraction rule is added. This rule creates  -->
+
+<!-- TODO gifs/vids -->
+
+<!-- 
+### Modules
+
+boids-engine
+
+boids-gui
+
+boids-wasm -->
 
 
 

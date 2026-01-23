@@ -5,4 +5,5 @@ unset WAYLAND_DISPLAY
 export DISPLAY=:0
 
 cd gui
-cargo run
+cargo run --bin boids
+# cargo run --bin perlin # TODO

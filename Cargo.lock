@@ -355,6 +355,11 @@ dependencies = [
 [[package]]
 name = "perlin-engine"
 version = "0.1.0"
+dependencies = [
+ "getrandom 0.2.16",
+ "js-sys",
+ "rand",
+]
 
 [[package]]
 name = "pin-project-lite"

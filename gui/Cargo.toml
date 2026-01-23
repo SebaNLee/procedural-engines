@@ -4,5 +4,5 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-boids-engine = { path = "../boids-engine" }
+boids-engine = { path = "../engines/boids-engine" }
 minifb = "0.28"

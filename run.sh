@@ -4,5 +4,5 @@
 unset WAYLAND_DISPLAY
 export DISPLAY=:0
 
-cd boids-gui
+cd gui
 cargo run

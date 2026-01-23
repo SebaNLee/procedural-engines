@@ -38,14 +38,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "boids-wasm"
-version = "0.1.0"
-dependencies = [
- "boids-engine",
- "wasm-bindgen",
-]
-
-[[package]]
 name = "bumpalo"
 version = "3.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -369,6 +361,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "perlin-engine"
+version = "0.1.0"
+
+[[package]]
 name = "pin-project-lite"
 version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -402,6 +398,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "535d180e0ecab6268a3e718bb9fd44db66bbbc256257165fc699dadf70d16fe7"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "procedural-engines-wasm"
+version = "0.1.0"
+dependencies = [
+ "boids-engine",
+ "wasm-bindgen",
 ]
 
 [[package]]

@@ -2,15 +2,15 @@ use wasm_bindgen::prelude::*;
 use boids_engine::{World, Vec2};
 
 #[wasm_bindgen]
-pub struct WorldAPI {
+pub struct BoidsAPI {
     engine: World,
 }
 
 #[wasm_bindgen]
-impl WorldAPI {
+impl BoidsAPI {
     #[wasm_bindgen(constructor)]
     pub fn new(n: usize, width: f32, height: f32) -> Self {
-        WorldAPI {
+        BoidsAPI {
             engine: World::new(n, width, height),
         }
     }

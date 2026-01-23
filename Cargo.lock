@@ -30,14 +30,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "boids-gui"
-version = "0.1.0"
-dependencies = [
- "boids-engine",
- "minifb",
-]
-
-[[package]]
 name = "bumpalo"
 version = "3.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -398,6 +390,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "535d180e0ecab6268a3e718bb9fd44db66bbbc256257165fc699dadf70d16fe7"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "procedural-engines-gui"
+version = "0.1.0"
+dependencies = [
+ "boids-engine",
+ "minifb",
+ "perlin-engine",
 ]
 
 [[package]]

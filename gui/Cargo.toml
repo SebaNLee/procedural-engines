@@ -1,8 +1,11 @@
 [package]
-name = "boids-gui"
+name = "procedural-engines-gui"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-boids-engine = { path = "../engines/boids-engine" }
 minifb = "0.28"
+
+# bin
+boids-engine = { path = "../engines/boids-engine" }
+perlin-engine = { path = "../engines/perlin-engine" }

@@ -8,4 +8,4 @@ minifb = "0.28"
 
 # bin
 boids-engine = { path = "../engines/boids-engine" }
-perlin-engine = { path = "../engines/perlin-engine" }
+topography-engine = { path = "../engines/topography-engine" }

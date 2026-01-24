@@ -353,15 +353,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "perlin-engine"
-version = "0.1.0"
-dependencies = [
- "getrandom 0.2.16",
- "js-sys",
- "rand",
-]
-
-[[package]]
 name = "pin-project-lite"
 version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -403,7 +394,7 @@ version = "0.1.0"
 dependencies = [
  "boids-engine",
  "minifb",
- "perlin-engine",
+ "topography-engine",
 ]
 
 [[package]]
@@ -605,6 +596,15 @@ dependencies = [
  "once_cell",
  "rustix",
  "windows-sys",
+]
+
+[[package]]
+name = "topography-engine"
+version = "0.1.0"
+dependencies = [
+ "getrandom 0.2.16",
+ "js-sys",
+ "rand",
 ]
 
 [[package]]

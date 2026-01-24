@@ -1,13 +1,13 @@
 
 
-pub struct Map {
+pub struct Topography {
     width: usize,
     height: usize,
 
     levels: usize,
 }
 
-impl Map {
+impl Topography {
     pub fn new(width: usize, height: usize, levels: usize) -> Self {
 
         Self {

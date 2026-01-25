@@ -98,8 +98,47 @@ impl Topography {
         let size = self.size;
         let last = self.size - 1;
         let map = &mut self.map;
+        let half = chunk / 2;
 
+        for y in (0..last).step_by(half) {
 
+            let shift = if y % chunk == 0 { half } else { 0 };
+
+            for x in (shift..last).step_by(chunk) {
+
+                let mut sum: f32 = 0.0;
+                let mut count: usize = 0;
+
+                // north
+                if y >= half {
+                    sum += map[x + (y - half) * size];
+                    count += 1;
+                }
+
+                // west
+                if x >= half {
+                    sum += map[(x - half) + y * size];
+                    count += 1;
+                }
+
+                // east
+                if x + half < size {
+                    sum += map[(x + half) + y * size];
+                    count += 1;
+                }
+
+                // south
+                if y + half < size {
+                    sum += map [x + (y + half) * size];
+                    count += 1;
+                }
+
+                let avg = sum / count as f32;
+                let random = (random_f32() - 0.5) * roughness;
+
+                map[x + y * size] = avg + random;
+            }
+        }
     }
 
     fn index_borders(&mut self) {

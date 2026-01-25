@@ -2,6 +2,14 @@ use crate::Point;
 use crate::random::random_f32;
 
 /*
+ * references:
+ * https://grokipedia.com/page/Diamond-square_algorithm
+ * https://en.wikipedia.org/wiki/Diamond-square_algorithm
+ * https://janert.me/blog/2022/the-diamond-square-algorithm-for-terrain-generation/
+ * https://www.youtube.com/watch?v=4GuAV1PnurU
+*/
+
+/*
  * note:
  * using x for X-axis
  * using y for Y-axis

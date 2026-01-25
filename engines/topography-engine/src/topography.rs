@@ -65,7 +65,7 @@ impl Topography {
         }
     }
 
-    fn square_step(&mut self, chunk: usize, roughness: f32) {
+    fn diamond_step(&mut self, chunk: usize, roughness: f32) {
         let size = self.size;
         let last = self.size - 1;
         let map = &mut self.map;
@@ -86,7 +86,7 @@ impl Topography {
         }
     }
 
-    fn diamond_step(&mut self, chunk: usize, roughness: f32) {
+    fn square_step(&mut self, chunk: usize, roughness: f32) {
         let size = self.size;
         let last = self.size - 1;
         let map = &mut self.map;

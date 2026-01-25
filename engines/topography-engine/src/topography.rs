@@ -69,6 +69,7 @@ impl Topography {
         let size = self.size;
         let last = self.size - 1;
         let map = &mut self.map;
+        let half = chunk / 2;
         
         for y in (0..last).step_by(chunk) {
             for x in (0..last).step_by(chunk) {
@@ -80,7 +81,7 @@ impl Topography {
                 let avg = (tl + tr + bl + br) * 0.25;
                 let random = (random_f32() - 0.5) * roughness;
 
-                map[(x + chunk / 2) + (y + chunk / 2) * size] = avg + random;
+                map[(x + half) + (y + half) * size] = avg + random;
             }
         }
     }

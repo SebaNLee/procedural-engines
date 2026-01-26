@@ -1,4 +1,4 @@
-use crate::Point;
+use crate::{Point, Segment};
 use crate::random::random_f32;
 
 /*
@@ -165,6 +165,23 @@ impl Topography {
     }
 
     fn compute_borders(&mut self) {
+        let last = self.size - 1;
 
+        for level in 0..self.levels {
+            let threshold = level as f32 / self.levels as f32;
+            let mut segments = Vec::new();
+
+            for y in 0..last {
+                for x in 0..last {
+                    self.marching_squares(x, y, threshold, &mut segments);
+                }
+            }
+
+            self.borders[level] = Segment::segments_to_polylines(segments);
+        }
+    }
+
+    fn marching_squares(&self, x: usize, y: usize, threshold: f32, segments: &mut Vec<Segment>) {
+        // TODO
     }
 }

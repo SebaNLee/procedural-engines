@@ -12,6 +12,11 @@ use crate::random::random_f32;
  * 
  * polygonal chain:
  * https://en.wikipedia.org/wiki/Polygonal_chain
+ * 
+ * marching squares:
+ * https://en.wikipedia.org/wiki/Marching_squares
+ * https://ragingnexus.com/creative-code-lab/experiments/algorithms-marching-squares/
+ * https://www.youtube.com/watch?v=0ZONMNUKTfU
  */
 
 /*

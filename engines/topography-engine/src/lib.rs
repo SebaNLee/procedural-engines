@@ -1,7 +1,7 @@
 mod random;
 mod topography;
-mod point;
+mod math;
 
 pub use random::random_f32;
 pub use topography::Topography;
-pub use point::Point;
+pub use math::{Point, Segment};

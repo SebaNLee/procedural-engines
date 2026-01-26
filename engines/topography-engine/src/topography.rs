@@ -49,7 +49,6 @@ impl Topography {
         self.index_borders();
     }
 
-
     pub fn get_borders(&self) -> &Vec<Vec<Point>> {
         &self.borders
     }
@@ -65,14 +64,14 @@ impl Topography {
         map[last * size] = random_f32();
         map[size * size - 1] = random_f32();
 
-        let mut chunk = size;
+        let mut chunk = size - 1;
 
         while chunk > 1 {
 
             self.square_step(chunk, roughness);
             self.diamond_step(chunk, roughness);
 
-            chunk = chunk.isqrt();
+            chunk /= 2;
             roughness *= 2.0_f32.powf(-self.hurst);
         }
     }
@@ -100,15 +99,14 @@ impl Topography {
 
     fn square_step(&mut self, chunk: usize, roughness: f32) {
         let size = self.size;
-        let last = self.size - 1;
         let map = &mut self.map;
         let half = chunk / 2;
 
-        for y in (0..last).step_by(half) {
+        for y in (0..size).step_by(half) {
 
             let shift = if y % chunk == 0 { half } else { 0 };
 
-            for x in (shift..last).step_by(chunk) {
+            for x in (shift..size).step_by(chunk) {
 
                 let mut sum: f32 = 0.0;
                 let mut count: usize = 0;

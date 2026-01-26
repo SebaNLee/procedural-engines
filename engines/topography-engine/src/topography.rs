@@ -40,6 +40,10 @@ impl Topography {
         }
     }
 
+    pub fn get_map(&self) -> &Vec<f32> {
+        &self.map
+    }
+
     pub fn compute(&mut self) {
         self.diamond_square();
         self.index_borders();

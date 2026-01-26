@@ -44,6 +44,17 @@ impl Topography {
         &self.map
     }
 
+    pub fn normalize(&mut self) {
+        let map = &mut self.map;
+        
+        let min = map.iter().cloned().fold(f32::INFINITY, f32::min);
+        let max = map.iter().cloned().fold(f32::NEG_INFINITY, f32::max);
+
+        for value in map {
+            *value = (*value - min) / (max - min);
+        }
+    }
+
     pub fn compute(&mut self) {
         self.diamond_square();
         self.index_borders();

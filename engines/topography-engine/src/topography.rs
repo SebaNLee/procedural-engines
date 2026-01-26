@@ -3,11 +3,16 @@ use crate::random::random_f32;
 
 /*
  * references:
+ * 
+ * diamond-square:
  * https://grokipedia.com/page/Diamond-square_algorithm
  * https://en.wikipedia.org/wiki/Diamond-square_algorithm
  * https://janert.me/blog/2022/the-diamond-square-algorithm-for-terrain-generation/
  * https://www.youtube.com/watch?v=4GuAV1PnurU
-*/
+ * 
+ * polygonal chain:
+ * https://en.wikipedia.org/wiki/Polygonal_chain
+ */
 
 /*
  * note:
@@ -18,7 +23,7 @@ use crate::random::random_f32;
 pub struct Topography {
     size: usize,
     map: Vec<f32>, // flat buffer for WASM efficiency
-    borders: Vec<Vec<Point>>,
+    borders: Vec<Vec<Vec<Point>>>, // polyline (ordered sequenced points) per level
 
     levels: usize,
     roughness: f32, // pseudo random range [0, 1]
@@ -57,10 +62,10 @@ impl Topography {
 
     pub fn compute(&mut self) {
         self.diamond_square();
-        self.index_borders();
+        self.compute_borders();
     }
 
-    pub fn get_borders(&self) -> &Vec<Vec<Point>> {
+    pub fn get_borders(&self) -> &Vec<Vec<Vec<Point>>> {
         &self.borders
     }
 
@@ -154,7 +159,7 @@ impl Topography {
         }
     }
 
-    fn index_borders(&mut self) {
+    fn compute_borders(&mut self) {
 
     }
 }

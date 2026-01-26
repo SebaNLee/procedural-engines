@@ -7,6 +7,7 @@ fn main() {
     let mut topography = Topography::new(size, 10, 0.5, 0.5);
 
     topography.compute();
+    topography.normalize();
 
     let map = topography.get_map();
 

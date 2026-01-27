@@ -402,6 +402,7 @@ name = "procedural-engines-wasm"
 version = "0.1.0"
 dependencies = [
  "boids-engine",
+ "topography-engine",
  "wasm-bindgen",
 ]
 

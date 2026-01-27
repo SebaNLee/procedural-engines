@@ -11,4 +11,4 @@ wasm-bindgen = "0.2"
 
 # engines
 boids-engine = {path = "../engines/boids-engine"}
-# perlin-engine = {path = "../engines/perlin-engine"} # TODO
+topography-engine = {path = "../engines/topography-engine"}

@@ -1,5 +1,5 @@
 mod boids;
-// mod perlin; // TODO
+mod topography;
 
 pub use boids::BoidsAPI;
-// pub use perlin::PerlinAPI; // TODO
+pub use topography::TopographyAPI;

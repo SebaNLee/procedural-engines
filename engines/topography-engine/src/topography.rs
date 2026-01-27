@@ -81,6 +81,10 @@ impl Topography {
         
         &self.borders[level]
     }
+    
+    pub fn levels(&self) -> usize {
+        self.levels
+    }
 
     fn diamond_square(&mut self) {
         let size = self.size;

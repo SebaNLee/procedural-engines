@@ -8,7 +8,7 @@ use crate::random::random_f32;
  * https://grokipedia.com/page/Diamond-square_algorithm
  * https://en.wikipedia.org/wiki/Diamond-square_algorithm
  * https://janert.me/blog/2022/the-diamond-square-algorithm-for-terrain-generation/
- * https://www.youtube.com/watch?v=4GuAV1PnurU
+ * https://www.youtube.com/watch?v=4GuAtrPnurU
  * 
  * polygonal chain:
  * https://en.wikipedia.org/wiki/Polygonal_chain
@@ -177,11 +177,71 @@ impl Topography {
                 }
             }
 
-            self.borders[level] = Segment::segments_to_polylines(segments);
+            self.borders[level] = Topography::segments_to_polylines(segments);
         }
     }
 
     fn marching_squares(&self, x: usize, y: usize, threshold: f32, segments: &mut Vec<Segment>) {
+        let size = self.size;
+        let map = &self.map;
+
+        // clockwise, starting from top left
+        let value_tl = map[x + y * size];
+        let value_tr = map[(x + 1) + y * size];
+        let value_br = map[(x + 1) + (y + 1) * size];
+        let value_bl = map[x + (y + 1) * size];
+            
+        let mut index = 0;
+        if value_tl > threshold { index |= 1; }
+        if value_tr > threshold { index |= 2; }
+        if value_br > threshold { index |= 4; }
+        if value_bl > threshold { index |= 8; }
+
+        if index == 0 || index == 15 {
+            return;
+        }
+
+        let point_tl = Point::new(x as f32, y as f32);
+        let point_tr = Point::new((x + 1) as f32, y as f32);
+        let point_br = Point::new((x + 1) as f32, (y + 1) as f32);
+        let point_bl = Point::new(x as f32, (y + 1) as f32);
+
+        let top    = || Topography::linear_interpolation(point_tl, point_tr, value_tl, value_tr, threshold);
+        let right  = || Topography::linear_interpolation(point_tr, point_br, value_tr, value_br, threshold);
+        let bottom = || Topography::linear_interpolation(point_br, point_bl, value_br, value_bl, threshold);
+        let left   = || Topography::linear_interpolation(point_bl, point_tl, value_bl, value_tl, threshold);
+
+        match index {
+            1 | 14 => segments.push(Segment::new(top(), left())),
+            2 | 13 => segments.push(Segment::new(top(), right())),
+            3 | 12 => segments.push(Segment::new(left(), right())),
+            4 | 11 => segments.push(Segment::new(right(), bottom())),
+            6 | 9  => segments.push(Segment::new(top(), bottom())),
+            7 | 8  => segments.push(Segment::new(left(), bottom())),
+
+            5 => {
+                segments.push(Segment::new(top(), right()));
+                segments.push(Segment::new(bottom(), left()));
+            }
+            10 => {
+                segments.push(Segment::new(top(), left()));
+                segments.push(Segment::new(right(), bottom()));
+            }
+
+            _ => {}
+        }
+    }
+
+    fn linear_interpolation(point1: Point, point2: Point, value1: f32, value2: f32, t: f32) -> Point {
+        let k = (t - value1) / (value2 - value1);
+        Point::new(
+            point1.x + k * (point2.x - point1.x),
+            point1.y + k * (point2.y - point1.y),
+        )
+    }
+    
+    fn segments_to_polylines(segments: Vec<Segment>) -> Vec<Vec<Point>> {
         // TODO
+        Vec::new()
     }
 }

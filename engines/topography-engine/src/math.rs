@@ -26,9 +26,4 @@ impl Segment {
             b,
         }
     }
-
-    pub fn segments_to_polylines(segments: Vec<Segment>) -> Vec<Vec<Point>> {
-        // TODO
-        Vec::new()
-    }
 }

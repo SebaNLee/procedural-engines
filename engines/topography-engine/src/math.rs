@@ -15,8 +15,8 @@ impl Point {
 }
 
 pub struct Segment {
-    a: Point,
-    b: Point,
+    pub a: Point,
+    pub b: Point,
 }
 
 impl Segment {

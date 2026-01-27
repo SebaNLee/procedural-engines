@@ -28,38 +28,38 @@ fn main() {
 
     let mut topography = Topography::new(SIZE, LEVELS, ROUGHNESS, HURST, BLUR_RADIOUS, BLUR_ITERATIONS);
     topography.compute();
-    let borders = topography.get_borders();
 
     while window.is_open() && !window.is_key_down(Key::Escape) {
         clear(&mut buffer, 0x000000);
 
         let size_f = (SIZE - 1) as f32;
 
-        for polylines in borders.iter() {
+        for level in 0..topography.levels() {
+            let polylines = topography.get_level_borders(level);
 
             for polyline in polylines {
-                for w in polyline.windows(2) {
-                    let p0 = &w[0];
-                    let p1 = &w[1];
+                    for w in polyline.windows(2) {
+                        let p0 = &w[0];
+                        let p1 = &w[1];
 
-                    let x0 = (p0.x / size_f * WIDTH as f32) as i32;
-                    let y0 = (p0.y / size_f * HEIGHT as f32) as i32;
-                    let x1 = (p1.x / size_f * WIDTH as f32) as i32;
-                    let y1 = (p1.y / size_f * HEIGHT as f32) as i32;
+                        let x0 = (p0.x / size_f * WIDTH as f32) as i32;
+                        let y0 = (p0.y / size_f * HEIGHT as f32) as i32;
+                        let x1 = (p1.x / size_f * WIDTH as f32) as i32;
+                        let y1 = (p1.y / size_f * HEIGHT as f32) as i32;
 
-                    draw_line(
-                        &mut buffer,
-                        x0,
-                        y0,
-                        x1,
-                        y1,
-                        WIDTH as i32,
-                        HEIGHT as i32,
-                        0xFFFFFF,
-                    );
+                        draw_line(
+                            &mut buffer,
+                            x0,
+                            y0,
+                            x1,
+                            y1,
+                            WIDTH as i32,
+                            HEIGHT as i32,
+                            0xFFFFFF,
+                        );
+                    }
                 }
             }
-        }
 
         window
             .update_with_buffer(&buffer, WIDTH, HEIGHT)

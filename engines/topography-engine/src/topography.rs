@@ -33,10 +33,12 @@ pub struct Topography {
     levels: usize,
     roughness: f32, // pseudo random range [0, 1]
     hurst: f32, // decay factor for roughness [0, 1]
+    blur_radious: usize,
+    blur_iterations: usize,
 }
 
 impl Topography {
-    pub fn new(size: usize, levels: usize, roughness: f32, hurst: f32) -> Self {
+    pub fn new(size: usize, levels: usize, roughness: f32, hurst: f32, blur_radious: usize, blur_iterations: usize) -> Self {
         assert!((size - 1).is_power_of_two(), "Error: size must be 2^n + 1");
 
         Self {
@@ -47,6 +49,8 @@ impl Topography {
             levels,
             roughness,
             hurst,
+            blur_radious,
+            blur_iterations,
         }
     }
 
@@ -67,6 +71,7 @@ impl Topography {
 
     pub fn compute(&mut self) {
         self.diamond_square();
+        self.blur_box(self.blur_radious, self.blur_iterations);
         self.normalize();
         self.compute_borders();
     }
@@ -292,5 +297,36 @@ impl Topography {
         }
 
         polylines
+    }
+
+    fn blur_box(&mut self, radius: usize, iterations: usize) {
+        let size = self.size;
+        let mut temp = self.map.clone();
+
+        for _ in 0..iterations {
+            for y in 0..size {
+                for x in 0..size {
+                    let mut sum = 0.0;
+                    let mut count = 0;
+
+                    for dy in -(radius as isize)..=(radius as isize) {
+                        for dx in -(radius as isize)..=(radius as isize) {
+                            let nx = x as isize + dx;
+                            let ny = y as isize + dy;
+
+                            if nx >= 0 && ny >= 0 &&
+                            nx < size as isize && ny < size as isize {
+                                sum += self.map[nx as usize + ny as usize * size];
+                                count += 1;
+                            }
+                        }
+                    }
+
+                    temp[x + y * size] = sum / count as f32;
+                }
+            }
+
+            std::mem::swap(&mut self.map, &mut temp);
+        }
     }
 }

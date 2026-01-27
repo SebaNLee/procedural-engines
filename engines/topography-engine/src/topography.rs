@@ -242,7 +242,55 @@ impl Topography {
     }
     
     fn segments_to_polylines(segments: Vec<Segment>) -> Vec<Vec<Point>> {
-        // TODO
-        Vec::new()
+        const EPSILON: f32 = 1e-7;
+
+        let same = |a: &Point, b: &Point| (a.x - b.x).abs() < EPSILON && (a.y - b.y).abs() < EPSILON;
+
+        let mut used = vec![false; segments.len()];
+        let mut polylines = Vec::new();
+
+        for i in 0..segments.len() {
+            if used[i] {
+                continue
+            }
+
+            used[i] = true;
+            let mut line = vec![segments[i].a, segments[i].b];
+
+            let mut grew = true;
+            while grew {
+                grew = false;
+
+                for j in 0..segments.len() {
+                    if used[j] {
+                        continue;
+                    }
+
+                    let s = &segments[j];
+                    let first = line.first().unwrap();
+                    let last  = line.last().unwrap();
+
+                    if same(&s.a, last) {
+                        line.push(s.b);
+                    } else if same(&s.b, last) {
+                        line.push(s.a);
+                    } else if same(&s.a, first) {
+                        line.insert(0, s.b);
+                    } else if same(&s.b, first) {
+                        line.insert(0, s.a);
+                    } else {
+                        continue;
+                    }
+
+                    used[j] = true;
+                    grew = true;
+                    break;
+                }
+            }
+
+            polylines.push(line);
+        }
+
+        polylines
     }
 }

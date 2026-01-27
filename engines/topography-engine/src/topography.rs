@@ -76,8 +76,10 @@ impl Topography {
         self.compute_borders();
     }
 
-    pub fn get_borders(&self) -> &Vec<Vec<Vec<Point>>> {
-        &self.borders
+    pub fn get_level_borders(&self, level: usize) -> &Vec<Vec<Point>> {
+        assert!(level < self.levels, "Error: level must be between 0 and self.levels - 1");
+        
+        &self.borders[level]
     }
 
     fn diamond_square(&mut self) {

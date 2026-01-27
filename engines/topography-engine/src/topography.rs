@@ -54,7 +54,7 @@ impl Topography {
         &self.map
     }
 
-    pub fn normalize(&mut self) {
+    fn normalize(&mut self) {
         let map = &mut self.map;
         
         let min = map.iter().cloned().fold(f32::INFINITY, f32::min);
@@ -67,6 +67,7 @@ impl Topography {
 
     pub fn compute(&mut self) {
         self.diamond_square();
+        self.normalize();
         self.compute_borders();
     }
 

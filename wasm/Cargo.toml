@@ -2,6 +2,9 @@
 name = "procedural-engines-wasm"
 version = "0.1.0"
 edition = "2024"
+description = "Procedural engines (boids, topography) compiled to WASM"
+license = "MIT"
+repository = "https://github.com/SebaNLee/procedural-engines"
 
 [lib]
 crate-type = ["cdylib"]

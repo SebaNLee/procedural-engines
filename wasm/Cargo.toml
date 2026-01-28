@@ -1,6 +1,6 @@
 [package]
 name = "procedural-engines-wasm"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "Procedural engines (boids, topography) compiled to WASM"
 license = "MIT"

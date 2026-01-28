@@ -1,10 +1,10 @@
-# topography-engine (WASM)
+# procedural-engines-wasm
 
 ## Installation
 
 ```
-npm install topography-engine
-pnpm install topography-engine
+npm install procedural-engines-wasm
+pnpm install procedural-engines-wasm
 ```
 
 ## Pseudo-docs
@@ -39,4 +39,4 @@ getLevelBorders(level: number): Float32Array | number[]
 
 ## Link
 
-https://www.npmjs.com/package/topography-wasm
+https://www.npmjs.com/package/procedural-engines-wasm

@@ -20,7 +20,7 @@ Returns polylines to later use them for drawing.
 
 ## WASM
 
-The code above gets bundled with Rust wasm-bindgen and exported as an [NPM package](https://www.npmjs.com/package/topography-wasm).
+The code above gets bundled with Rust wasm-bindgen and exported as an [NPM package](https://www.npmjs.com/package/procedural-engines-wasm).
 
 For detailed implementation details, read /wasm/README.md.
 

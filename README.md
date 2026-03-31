@@ -1,6 +1,6 @@
 # procedural-engines
 
-Repo to store a variety of procedural generation code, intended to be used in my [personal website](sebalee.com) as background. Rust for the source code and exporting it as a NPM package to be used with WASM.
+Repo to store a variety of procedural generation code, intended to be used in my [personal website](https://www.sebalee.com) as background. Rust for the source code and exporting it as a NPM package to be used with WASM.
 
 For the sake of debugging and quick observation, it is possible to run the engines locally with the minifb Rust library.
 
